@@ -3,7 +3,9 @@ public class Demo {
 
     public static void main(String[] args) {
         Second fs = new Second();
-        fs.string();
+//        fs.string();
+//        fs.list();
+        fs.map();
     }
 
     public String thisAttr(){
