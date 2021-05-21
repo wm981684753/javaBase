@@ -5,7 +5,8 @@ public class Demo {
         Second fs = new Second();
 //        fs.string();
 //        fs.list();
-        fs.map();
+//        fs.map();
+        fs.date();
     }
 
     public String thisAttr(){
