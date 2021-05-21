@@ -6,7 +6,8 @@ public class Demo {
 //        fs.string();
 //        fs.list();
 //        fs.map();
-        fs.date();
+//        fs.date();
+        fs.math();
     }
 
     public String thisAttr(){

@@ -147,19 +147,37 @@ public class Second extends First {
 
         //Calender日历类
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH,1);//默认获取上个月，获取当前月得+1
+        calendar.add(Calendar.MONTH, 1);//默认获取上个月，获取当前月得+1
         int y = calendar.get(Calendar.YEAR);
         int m = calendar.get(Calendar.MONTH);
         int d = calendar.get(Calendar.DATE);
         int h = calendar.get(Calendar.HOUR_OF_DAY);//注意此处使用24h制
         int i = calendar.get(Calendar.MINUTE);
         int s = calendar.get(Calendar.SECOND);
-        System.out.println(y+"-"+m+"-"+d+" "+h+":"+i+":"+s);
+        System.out.println(y + "-" + m + "-" + d + " " + h + ":" + i + ":" + s);
 
         //获取当月最后一天
         Calendar calendar1 = Calendar.getInstance();
-        calendar1.set(Calendar.DATE,calendar1.getActualMaximum(Calendar.DATE));//设置当前日期为当月的最后一天
+        calendar1.set(Calendar.DATE, calendar1.getActualMaximum(Calendar.DATE));//设置当前日期为当月的最后一天
         Date lastDay = calendar1.getTime();
         System.out.println(sdf.format(lastDay));
+    }
+
+    /**
+     * Math类
+     */
+    public void math() {
+        double d = 23.45;
+        double ceil = Math.ceil(d);//向上取整
+        double floor = Math.floor(d);//向下取整
+        double round = Math.round(d);//四舍五入
+        int i = (int)ceil;
+        System.out.println(i);
+
+        int ii = -23;
+        int abs = Math.abs(ii);//取绝对值
+
+        int max = Math.max(1,3);//取最大值
+        double min = Math.min(1.2,3.4);//取最小值
     }
 }
