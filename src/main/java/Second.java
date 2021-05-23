@@ -116,6 +116,10 @@ public class Second extends First {
         Set<String> keys = map.keySet();//返回所有key组成的集合
         Collection<Object> vals = map.values();//返回val集合
         Set<Map.Entry<String, Object>> entrySet = map.entrySet();//返回键值对集合
+        for (Map.Entry<String,Object> me: entrySet) {//遍历
+            String key = me.getKey();
+            Object value = me.getValue();
+        }
         System.out.println(vals.toArray()[1]);
 
         //List\Set区别https://blog.csdn.net/cool_sti/article/details/17501145
