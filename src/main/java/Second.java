@@ -1,12 +1,13 @@
 import sun.util.resources.CalendarData;
 
 import javax.swing.text.html.parser.Entity;
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.SimpleFormatter;
 
-public class Second extends First {
+public class Second extends First implements Serializable {
     String s_str = "second";
 
     public Second() {
