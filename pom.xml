@@ -7,6 +7,65 @@
     <groupId>org.example</groupId>
     <artifactId>test</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
+    <dependencies>
+        <dependency>
+            <!--依赖坐标-->
+            <!--依赖项目的坐标三元素：groupId + artifactId + version -->
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>3.8.1</version>
+
+            <!-- 依赖类型 -->
+            <!-- 依赖类型，默认是jar。通常表示依赖文件的扩展名，但有例外。一个类型可以被映射成另外一个扩展名或分类器 -->
+            <!-- 类型经常和使用的打包方式对应，尽管这也有例外，一些类型的例子：jar，war，ejb-client和test-jar -->
+            <!-- 如果设置extensions为true，就可以在plugin里定义新的类型 -->
+            <type>jar</type>
+            <!-- 依赖的分类器。分类器可以区分属于同一个POM，但不同构建方式的构件。分类器名被附加到文件名的版本号后面 -->
+            <!-- 如果想将项目构建成两个单独的JAR，分别使用Java 4和6编译器，就可以使用分类器来生成两个单独的JAR构件 -->
+            <classifier></classifier>
+
+            <!-- 依赖传递 -->
+            <!--依赖排除，即告诉maven只依赖指定的项目，不依赖该项目的这些依赖。此元素主要用于解决版本冲突问题 -->
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-core</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+            <!-- 可选依赖，用于阻断依赖的传递性。如果在项目B中把C依赖声明为可选，那么依赖B的项目中无法使用C依赖 -->
+            <optional>true</optional>
+
+            <!--- 依赖范围 -->
+            <!--依赖范围。在项目发布过程中，帮助决定哪些构件被包括进来
+                - compile：默认范围，用于编译;  - provided：类似于编译，但支持jdk或者容器提供，类似于classpath
+                - runtime: 在执行时需要使用;    - systemPath: 仅用于范围为system。提供相应的路径
+                - test: 用于test任务时使用;    - system: 需要外在提供相应的元素。通过systemPath来取得
+                - optional: 当项目自身被依赖时，标注依赖是否传递。用于连续依赖时使用 -->
+            <scope>test</scope>
+            <!-- 该元素为依赖规定了文件系统上的路径。仅供scope设置system时使用。但是不推荐使用这个元素 -->
+            <!-- 不推荐使用绝对路径，如果必须要用，推荐使用属性匹配绝对路径，例如${java.home} -->
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.25</version>
+        </dependency>
+
+
+    </dependencies>
 
 </project>

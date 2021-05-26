@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="8.0">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$MAVEN_REPOSITORY$/Mysql/mysql-connector-java/8.0.18" />
+    </SOURCES>
+    <jarDirectory url="file://$MAVEN_REPOSITORY$/Mysql/mysql-connector-java/8.0.18" recursive="false" type="SOURCES" />
+  </library>
+</component>
