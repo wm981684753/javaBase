@@ -1,12 +1,16 @@
+import javax.xml.transform.stream.StreamResult;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.*;
+import java.util.*;
 
 //数据库操作Demo类
 public class SqlConn {
+    // 存储本类对象
+    private static SqlConn sqlConn = null;
     // 数据库连接对象
-    private static Connection connection;
+    private static Connection connection = null;
     // 数据库连接地址
     private static String path = "jdbc:mysql://127.0.0.1:3306";
     // 数据库名称
@@ -21,63 +25,90 @@ public class SqlConn {
     private static String password = "root";
 
     /**
-     * 无参构造函数，使用默认配置
+     * 静态构造函数，防止外部创建对象
      */
-    public SqlConn(){}
+    private SqlConn() {
+    }
 
     /**
-     * 全参数构造函数，自定义连接参数
-     * @param path
-     * @param database
-     * @param characterEncoding
-     * @param useSSL
-     * @param userName
-     * @param password
+     * 公共的创建本类对象的唯一静态方法
+     * 避免生成多个对象
+     *
+     * @return
      */
-    public SqlConn(String path,String database,String characterEncoding,String useSSL,String userName,String password){
-        if(path.length()>0){
-            SqlConn.path = path;
+    public static SqlConn getInstance() {
+        if (sqlConn == null) {
+            sqlConn = new SqlConn();
         }
-        if(database.length()>0){
-            SqlConn.database = path;
-        }
-        if(characterEncoding.length()>0){
-            SqlConn.characterEncoding = path;
-        }
-        if(useSSL.length()>0){
-            SqlConn.useSSL = path;
-        }
-        if(userName.length()>0){
-            SqlConn.userName = path;
-        }
-        if(password.length()>0){
-            SqlConn.password = path;
-        }
+        return sqlConn;
     }
 
     /**
      * 创建并获取数据库连接对象
+     *
      * @return
      */
     public Connection getCon() {
-        try {
-            //加载数据库驱动
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("数据库驱动创建");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        if (connection == null) {
+            try {
+                //加载数据库驱动
+                Class.forName("com.mysql.jdbc.Driver");
+                System.out.println("数据库驱动创建");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                String url;//数据库连接url
+                url = path + "/" + database + "?" + characterEncoding + "&" + useSSL;
+
+                //获取数据库连接对象
+                connection = DriverManager.getConnection(url, userName, password);
+                System.out.println("数据库连接成功");
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
+        return connection;
+    }
 
+    /**
+     * insertAll操作
+     * 一次插入多条数据
+     */
+    public static int insertAll(String table, List<Map<String, String>> data) {
+        if (connection == null) {
+            SqlConn sqlConn = SqlConn.getInstance();
+            connection = sqlConn.getCon();
+        }
         try {
-            String url;//数据库连接url
-            url = path + "/" + database + "?" + characterEncoding + "&" + useSSL;
+            //实例化Statement对象
+            connection.setAutoCommit(false);
+            Statement statement = connection.createStatement();
 
-            //获取数据库连接对象
-            connection = DriverManager.getConnection(url, userName, password);
-            System.out.println("数据库连接成功");
+            //解析data数据,组合sql
+            for (Map<String, String> map_data : data) {
+                StringBuilder fields = new StringBuilder();
+                StringBuilder values = new StringBuilder();
+                Set<Map.Entry<String, String>> entrySet = map_data.entrySet();
+                for (Map.Entry<String, String> entry : entrySet) {
+                    String field = fields.length()>0?","+entry.getKey():entry.getKey();
+                    fields.append(field);
+                    String value = values.length()>0?","+"'"+entry.getValue()+"'":"'"+entry.getValue()+"'";
+                    values.append(value);
+                }
+                String fields_string = fields.toString();
+                String values_string = values.toString();
+                String sql = "insert into name_sign("+fields_string+") values("+values_string+")";
+                if(statement.executeUpdate(sql)!=1){
+                    connection.rollback();
+                }
+            }
+            connection.commit();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return connection;
+        return 1;
     }
 }
