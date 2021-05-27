@@ -5,7 +5,8 @@
 
 <generatorConfiguration>
     <!--本地数据库驱动-->
-    <classPathEntry location="C:\Users\Administrator\.m2\repository\Mysql\mysql-connector-java\5.1.25\mysql-connector-java-5.1.25.jar"/>
+<!--    <classPathEntry location="C:\Users\Administrator\.m2\repository\Mysql\mysql-connector-java\5.1.25\mysql-connector-java-5.1.25.jar"/>-->
+    <classPathEntry location="C:\Users\weiming\.m2\repository\mysql\mysql-connector-java\5.1.25\mysql-connector-java-5.1.25.jar"/>
     <context id="MysqlTables" targetRuntime="MyBatis3">
         <!--去除注释  -->
         <commentGenerator>
