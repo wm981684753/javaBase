@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--当返回行的所有列都是空时，MyBatis默认返回null-->
+        <setting name="returnInstanceForEmptyRow" value="true"/>
+        <!--显示sql语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+
+    </settings>
+
+    <!--设置别名-->
+    <typeAliases>
+        <typeAlias alias="User" type="com.gxa.(项目名称).pojo.User"/>
+        <!--<package name="com.gxa.ehome.pojo" />-->
+    </typeAliases>
+
+
+    <environments default="development">
+
+        <environment id="development">
+            <!--使用了 JDBC 的提交和回滚设置，它依赖于从数据源得到的连接来管理事务作用域-->
+            <transactionManager type="JDBC"/>
+            <!-- mybatis提供了3种数据源类型，分别是：POOLED,UNPOOLED,JNDI -->
+            <!-- POOLED 表示支持JDBC数据源连接池 -->
+            <!-- UNPOOLED 表示不支持数据源连接池 -->
+            <!-- JNDI 表示支持外部数据源连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/(数据库名称)?useSSL=false&amp;characterEncoding=utf8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!-- 映射文件方式1，一个一个的配置
+        <mapper resource="com.gxa.(项目名称).mapper.UserMapper" /> -->
+
+        <!-- 映射文件方式2，自动扫描包内的Mapper接口与配置文件 -->
+        <package name="com.gxa.(项目名称).mapper"/>
+    </mappers>
+</configuration>
