@@ -12,10 +12,10 @@
     </settings>
 
     <!--设置别名-->
-    <typeAliases>
-        <typeAlias alias="User" type="com.gxa.(项目名称).pojo.User"/>
-        <!--<package name="com.gxa.ehome.pojo" />-->
-    </typeAliases>
+<!--    <typeAliases>-->
+<!--        <typeAlias alias="User" type="com.gxa.(javabase).pojo.User"/>-->
+<!--        &lt;!&ndash;<package name="com.gxa.ehome.pojo" />&ndash;&gt;-->
+<!--    </typeAliases>-->
 
 
     <environments default="development">
@@ -39,7 +39,6 @@
     <mappers>
         <!-- 映射文件方式1，一个一个的配置
         <mapper resource="com.gxa.(项目名称).mapper.UserMapper" /> -->
-        <mapper resource="com.junly.mybatis.mapper.NameSingMapper" />
         <!-- 映射文件方式2，自动扫描包内的Mapper接口与配置文件 -->
         <package name="com.junly.mybatis.mapper"/>
     </mappers>

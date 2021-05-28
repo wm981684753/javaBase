@@ -15,4 +15,10 @@ public class NameSignDao {
         session.commit();
         return rint;
     }
+
+    public void selectByPrimaryKey(Integer id) {
+        NameSingMapper nameSingMapper = session.getMapper(NameSingMapper.class);
+        NameSing nameSing = nameSingMapper.selectByPrimaryKey(id);
+        System.out.println(nameSing);
+    }
 }
