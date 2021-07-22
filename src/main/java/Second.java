@@ -92,7 +92,7 @@ public class Second extends First implements Serializable {
         //集合去重2 Collections.frequency：返回指定集合中指定对象出现的次数
         List<Object> list3 = new ArrayList<Object>();
         for (Object o : list) {
-            if (Collections.frequency(list, o) < 1) {
+            if (Collections.frequency(list3, o) < 1) {
                 list3.add(o);
             }
         }
