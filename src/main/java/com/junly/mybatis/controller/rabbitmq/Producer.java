@@ -54,6 +54,7 @@ public class Producer {
             channel.basicPublish(exchangeName, routingKey, properties, ("messages-" + i).getBytes());
         }
 
+        //关闭频道
         channel.close();
         conn.close();
     }
