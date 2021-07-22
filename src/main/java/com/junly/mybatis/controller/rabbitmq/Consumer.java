@@ -1,8 +1,10 @@
 package com.junly.mybatis.controller.rabbitmq;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 public class Consumer {
@@ -18,9 +20,10 @@ public class Consumer {
         final Channel channel = conn.createChannel();
         //声明交换器
         String exchangeName = "hello-exchange";
-        channel.exchangeDeclare(exchangeName, "direct", true);
+        channel.exchangeDeclare(exchangeName, "direct", true);//设置交换机类型 direct、topic、fanout
         //声明队列
         String queueName = channel.queueDeclare().getQueue();
+        //声明路由
         String routingKey = "hola";
         //绑定队列，通过键 hola 将队列和交换器绑定起来
         channel.queueBind(queueName, exchangeName, routingKey);
@@ -44,8 +47,10 @@ public class Consumer {
                     channel.basicAck(deliveryTag, false);
                     System.out.println("消费的消息体内容：");
                     String bodyStr = new String(body, "UTF-8");
+//                    JSONObject  jsonObject = JSONObject.parseObject(bodyStr);
+//                    Map jsonToMap =  JSONObject.parseObject(jsonObject.toJSONString());
+//                    System.out.println(jsonToMap.get("type"));
                     System.out.println(bodyStr);
-
                 }
             });
         }
