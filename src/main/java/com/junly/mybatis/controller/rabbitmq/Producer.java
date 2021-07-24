@@ -36,7 +36,22 @@ public class Producer {
         Map<String, String> msg = new HashMap<String, String>();
         msg.put("type", "message");
         msg.put("msg", "消息数据");
-        String msgString = JSON.toJSONString(msg);//使用自带JSON处理
+        msg.put("msg1", "消息数据");
+        msg.put("msg2", "消息数据");
+        msg.put("msg3", "消息数据");
+        msg.put("msg4", "消息数据");
+        msg.put("msg5", "消息数据");
+        msg.put("msg6", "消息数据");
+        msg.put("msg7", "消息数据");
+        msg.put("msg8", "消息数据");
+        msg.put("msg9", "消息数据");
+        msg.put("msg10", "消息数据");
+        msg.put("msg11", "消息数据");
+        msg.put("msg12", "消息数据");
+        msg.put("msg14", "消息数据");
+        msg.put("msg15", "消息数据");
+        msg.put("msg16", "消息数据");
+        String msgString = JSON.toJSONString(msg);//使用JSON处理
 //        JSONObject jsonobj = (JSONObject) JSONObject.toJSON(msg);//使用fastJson处理
 //        String msgString = jsonobj.toString();
         channel.basicPublish(exchangeName, routingKey, null, msgString.getBytes());
